@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\werkc\\Dropbox\\PC\\Desktop\\Data Structures\\jars\\algs4.jar",
+        "c:\\Users\\werkc\\Dropbox\\PC\\Desktop\\Data Structures\\jars\\stdlib.jar"
+    ]
+}
