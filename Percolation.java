@@ -29,34 +29,14 @@ public class Percolation {
 
     public void open(int row, int col) {
         // open the site (row, col) if it is not open already
-        if (validate(row, col)) {
-            if (grid[row][col] == true) {
-
-            }
-            else {
-                grid[row][col] = true;
-                openSites++;
-            }
-
-        }
-    }
-
-    public boolean isOpen(int row, int col) {
-
-        // is the site (row, col) open?
-        return grid[row][col]; //FIXME
-    }
-
-    public boolean isFull(int row, int col) {
-        // is the site (row, col) full?
-
         if (validate(row, col) && grid[row][col]) {
             // if open site is on top row
             if (row == 0) {
                 WQUF.union(convert1D(row, col), TOP_SITE);
-                isOpen(row + 1, col);
-
-                return true;
+                // connect bottom cell
+                if (isOpen(row + 1, col)) WQUF.union(convert1D(row + 1, col), convert1D(row, col));
+                //connect left cell
+                if (isOpen(row, col - 1)) WQUF.union(convert1D(row, col + 1), convert1D(row, col));
             }
             // check cell above if row >= 1
             else if (row >= 1) {
@@ -65,10 +45,21 @@ public class Percolation {
 
             }
             else {
-                return false;
             }
         } //outer if end
-        return false;
+        openSites++;
+    }
+
+    public boolean isOpen(int row, int col) {
+        // is the site (row, col) open?
+        return grid[row][col]; //FIXME
+    }
+
+    public boolean isFull(int row, int col) {
+        validate(row, col);
+        // is the site (row, col) full?
+        return (WQUF.find(convert1D(row, col)) == WQUF.find(TOP_SITE));
+
     }
 
     public int numberOfOpenSites() {
@@ -78,7 +69,7 @@ public class Percolation {
 
     public boolean percolates() {
         // does the system percolate?
-        return WQUF.find(TOP_SITE) == WQUF.find(BOTTOM_SITE); //FIXME
+        return WQUF.find(TOP_SITE) == WQUF.find(BOTTOM_SITE);
     }
 
     private boolean validate(int row, int col) {
