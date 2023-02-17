@@ -1,6 +1,6 @@
 /* *****************************************************************************
- *  Name:              Ada Lovelace
- *  Last modified:     October 16, 1842
+ *  Name:              Charles Werk
+ *  Last modified:     2-15-2023
  **************************************************************************** */
 
 import edu.princeton.cs.algs4.StdRandom;

@@ -17,50 +17,57 @@ public class PercolationStats {
         }
         // initialize gride size
         aux = new double[N];
-        for(int trial = 0; trial < experiments; trial++) {
+        for (int trial = 0; trial < experiments; trial++) {
             int openSites = 0;
             Percolation percolation = new Percolation(N);
 
-        //     open sites until percolation is reached
+            //     open sites until percolation is reached
             while (!percolation.percolates()) {
                 // assuming range is between 0 - N exclusive
                 int randRow = StdRandom.uniform(0, N + 1);
                 int randCol = StdRandom.uniform(0, N + 1);
                 // if site now open, the open. Using 0-based indexing.
-                if(!percolation.isOpen(randRow,randCol) && !percolation.isFull(randRow,randCol)) {
+                if (!percolation.isOpen(randRow, randCol) && !percolation.isFull(randRow,
+                                                                                 randCol)) {
                     percolation.open(randRow, randCol);
                 }
             }
             openSites = percolation.numberOfOpenSites();
-            aux[trial] = openSites/N*N;
+            aux[trial] = openSites / N * N;
         }
 
     }
 
     public double mean() {
         // sample mean of percolation threshold
-        return StdStats.mean(aux); //FIXME
+        return StdStats.mean(aux);
     }
 
     public double stddev() {
         // sample standard deviation of percolation threshold
-        return StdStats.stddev(aux); //FIXME
+        return StdStats.stddev(aux);
     }
 
     public double confidenceLow() {
         // low  endpoint of 95% confidence interval
-        return  mean() - ((1.96 * stddev()) / Math.sqrt(experiments)); //FIXME
+        // formula from moodle
+        return mean() - ((1.96 * stddev()) / Math.sqrt(experiments));
     }
 
     public double confidenceHigh() {
         // high endpoint of 95% confidence interval
-        return -9999.9999; //FIXME
+        // formula from moodle
+        return mean() + ((1.96 * stddev()) / Math.sqrt(experiments));
     }
 
     public static void main(String[] args) {
         // Not required for the API, but useful to test if
         // your code is doing reasonable things
         PercolationStats st = new PercolationStats(10, 10);
-        // ...
+        StdOut.println("mean() = " + st.mean());
+        StdOut.println("stddev() = " + st.stddev());
+        StdOut.println("Confidence Low() = " + st.confidenceLow());
+        StdOut.println("Confidence High() = " + st.confidenceHigh());
+
     }
 }
