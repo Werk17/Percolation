@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Name:     
+ *  Name:     Charles Werk
  *
  *  Hours to complete assignment (optional):
  *
@@ -13,12 +13,16 @@ Programming Assignment 1: Percolation
  *  whether the system percolates? This should be something like 3-5 sentences.
  *****************************************************************************/
 
-
-
+    The way I implemented the percolation.java problem is by first initializing the N * N grid with closed sites.
+    At the same time, I initialized a weighted quick-union that corresponds to the ordered grid[i][j] from 0 through N for i,j.
+    If grid[i][j] is open and full on the bottom row (weightedQuickUnion[indexAt(grid[i][j])), then the system percolates.
+    In other words, if the root of any element on the bottom row is equal to the root at the top node (in m case N*N is top node).
+    if it doesn't percolate, open a random site.
+    Added validation for checking IndexOutOfBounds.
 
 /******************************************************************************
  *  Perform computational experiments to estimate the running time of
- *  PercolationStats.java for values values of n and T when implementing
+ *  PercolationStats.java for values of n and T when implementing
  *  Percolation.java with QuickFindUF.java.
  *
  *  To do so, fill in the two tables below. Each table must have at least
